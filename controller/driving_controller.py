@@ -77,6 +77,7 @@ class DrivingController:
         self.controls_lock = threading.Lock()
         self._latest_controls = {
             "steering": 0.0,
+            "is_steering" : self.steering_mode,
             "throttle": 0.0,
             "brake": 0.0,
             "gear_up": False,
@@ -254,6 +255,7 @@ class DrivingController:
         # Build control dict
         controls = {
             "steering": self.steering_angle,
+            "is_steering" : self.steering_mode,
             "throttle": self.throttle,
             "brake": self.brake,
             "gear_up": self.gear_up,

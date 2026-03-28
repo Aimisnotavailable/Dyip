@@ -23,7 +23,10 @@ class InputController:
             #     pyautogui.keyUp('right')
 
             # Throttle: up arrow
-            pyautogui.keyDown('up')
+            if controls['is_steering']:
+                pyautogui.keyDown('up')
+            else:
+                pyautogui.keyUp('up')
             # if controls['throttle'] > 0.1:
             #     pyautogui.keyDown('up')
             # else:

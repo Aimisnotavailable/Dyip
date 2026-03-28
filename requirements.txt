@@ -2,3 +2,4 @@ pygame-ce
 mediapipe==0.10.14
 opencv-python
 colorama
+pygetwindow
