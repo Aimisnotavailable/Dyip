@@ -5,6 +5,7 @@ import math
 import numpy as np
 from controller.driving_controller import DrivingController
 from scripts.logger import log_gamestate
+import pydirectinput
 
 def draw_steering_wheel(img, center, angle, radius=100):
     """
@@ -134,6 +135,11 @@ def main():
         # Quit on 'q'
         key = cv2.waitKey(1) & 0xFF
         if key == ord('q'):
+            pydirectinput.keyUp('up')
+            pydirectinput.keyUp('down')
+            pydirectinput.keyUp('a')
+            pydirectinput.keyUp('d')
+            print("[INFO] All keys released.")
             break
 
         if key == ord('f'):
