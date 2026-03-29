@@ -22,10 +22,13 @@ class InputController:
         Processes control inputs and translates them to DirectInput key presses.
         """
         try:
-            # --- 1. ALWAYS ON THROTTLE (Testing Mode) ---
-            # Re-asserting keyDown('up') ensures that even if the game 
-            # misses a packet, the throttle remains engaged.
-            pydirectinput.keyDown('up')
+            # --- 1. ALWAYS ON THROTTLE if (Testing Mode) ---
+            # Else
+            # use is_steering to throttle
+            if controls.get('is_steering', False):
+                pydirectinput.keyDown('up')
+            else:
+                pydirectinput.keyUp('up')
 
             # --- 2. PROPORTIONAL STEERING LOGIC ---
             steering = controls.get('steering', 0.0)
