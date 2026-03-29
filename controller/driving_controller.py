@@ -15,6 +15,9 @@ from controller.gesture_detector import (
 from controller.input_controller import InputController
 from scripts.logger import get_logger_info
 
+# Tune out time the polling rate for both the input loop and tracking loop
+# Input loop right now has more than 200fps (if my computation is right) (duplication from the tracking loop causes that massive tilt in controls)
+# Tracking loop only runs based on the camera input feed
 
 class DrivingController:
     """

@@ -35,25 +35,27 @@ class InputController:
             now = time.time()
 
             # Deadzone check (0.2)
-            if abs(steering) > 0.2:
+            if abs(steering) > 0.1:
                 target_key = 'a' if steering < 0 else 'd'
                 
                 # Map intensity: 0.2 - 1.0 steering magnitude -> 0.0 - 1.0 strength
                 strength = min(1.0, (abs(steering) - 0.2) / 0.8)
                 # Map strength to hold duration: 0.05s to 0.25s
-                hold_time = 0.05 + strength * 0.20
+
+                hold_time = 0.1 + strength * 0.20
+                print(hold_time)
 
                 # Check if we can initiate a new steering pulse
                 if now - self.last_steer_time > self.steer_cooldown:
                     # Release previous key if it's different
                     if self.current_steer_key and self.current_steer_key != target_key:
                         pydirectinput.keyUp(self.current_steer_key)
-                    
                     pydirectinput.keyDown(target_key)
                     self.current_steer_key = target_key
                     self.steer_hold_start = now
                     self.steer_hold_duration = hold_time
                     self.last_steer_time = now
+                    pydirectinput.keyUp(target_key)
                 else:
                     # If we are currently holding a key, check if it's time to release it
                     if self.current_steer_key:
