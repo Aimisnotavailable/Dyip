@@ -76,7 +76,7 @@ class DrivingController:
         self.force_fist = False
 
         # ---- Separate input thread ----
-        self.input = InputController()
+        self.input = InputController(update_freq=60)
         self.controls_lock = threading.Lock()
         self._latest_controls = {
             "steering": 0.0,
